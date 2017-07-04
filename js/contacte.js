@@ -26,6 +26,14 @@ var getRow1 = function (firstName, lastName, phone) {
     return row;
 }*/
 
+/*var contacte = [
+    {firstName: 'Matei', lastName: 'Nicolae', phone: '01'},
+    {firstName: 'Alexandra', lastName: 'Bichir', phone: '02'},
+    {firstName: 'Simina', lastName: 'Pop', phone: '03'},
+    {firstName: 'Andrei'},
+    {lastName: 'Basescu'}
+];*/
+
 var contacte = [
     {firstName: 'Matei', lastName: 'Nicolae', phone: '01'},
     {firstName: 'Alexandra', lastName: 'Bichir', phone: '02'},
@@ -33,7 +41,6 @@ var contacte = [
     {firstName: 'Andrei'},
     {lastName: 'Basescu'}
 ];
-
 
 var person = {
     lastNume: "Matei",
@@ -76,19 +83,35 @@ var person = {
     }
 };
 
-console.info(person.firstName);
-person.voiceCall("Soacra");
+//console.info(person.firstName);
+//person.voiceCall("Soacra");
+
+var contacte = [];
 
 var tableContent = '';
+
 for (var i = 0; i < contacte.length; i++) {
     //getRow(contacte[i][0], contacte[i][1], contacte[i][2])
-    var contact = contacte[i];
+    //var contact = contacte[i];
     //tableContent += getRow(contact[0], contact[1], contact[2]);
-    tableContent += getRow(contact.firstName, contact.lastName, contact.phone);
+    //tableContent += getRow(contact.firstName, contact.lastName, contact.phone);
     //tableContent += getRow1(contact[0], contact[1], contact[2]);
+    createRow(contacte[i]);
 }
 
-$("#contacts-list tbody").html(tableContent);
+function createRow(contact) {
+    tableContent += getRow(contact.firstName, contact.lastName, contact.phone);
+}
+
+$.ajax('date/contacte.json').done(function(contacte){
+    console.info('contacte ',  contacte);
+    contacte.forEach(createRow);
+    $("#contacts-list tbody").html(tableContent);
+});
+console.info('after ajax');
+
+
+//contacte.forEach(createRow);
 
 //var contacte = ['Nicolae', 'Matei', '123'];
 //var contactsList = document.getElementById("contacts-list");
@@ -99,6 +122,7 @@ $("#contacts-list tbody").html(tableContent);
 //2. load contacts from json file with ajax
 //3. remove contacts (UI)
 //4. edit contacts (UI)
+
 
 
 
