@@ -3,15 +3,23 @@
  return document.getElementById();
  }*/
 
-function getRow(firstName, lastName, phone) {
-    if(phone == undefined) {
+function getRow(contact) {
+    /*if(phone == undefined) {
         phone = '';
     }
     if(typeof lastName == 'undefined') {
         lastName = '';
-    }
-    firstName = firstName || '';
-    var row = '<tr><td>' + (firstName || '') + '</td><td>' + lastName + '</td><td>' + phone + '</td></tr>';
+    }*/
+    var id = contact.id || '';
+    var phone = contact.phone || '';
+    var  lastName = contact.lastName || '';
+    var  firstName = contact.firstName || '';
+    var row = '<tr><td>' + firstName + '</td><td>' + lastName + '</td><td>' + phone + '</td>' +
+        '<td class="actions">' +
+            '<span> <a href="date/remove.html?id=' + id + '"> &#x2718; </a> </span> ' +
+            '<span> <a class="edit" href="#"> &#x270E; </a> </span>' +
+        '</td>' +
+        '</tr>';
     return row;
 }
 
@@ -48,15 +56,27 @@ for (var i = 0; i < contacte.length; i++) {
 }
 
 function createRow(contact) {
-    tableContent += getRow(contact.firstName, contact.lastName, contact.phone);
+    tableContent += getRow(contact);
 }
 
 $.ajax('date/contacte.json').done(function(contacte){
     console.info('contacte ',  contacte);
     contacte.forEach(createRow);
     $("#contacts-list tbody").html(tableContent);
+
+    $('.edit').click(function (){
+//TODO
+        editContact("Matei", "Ioan", "78");
+    });
+
 });
 console.info('after ajax');
+
+function editContact(firstName, lastName, phone) {
+    $("input[name=firstName]").val(firstName);
+    $("input[name=lastName]").val(lastName);
+    $("input[name=phone]").val(phone);
+}
 
 
 //contacte.forEach(createRow);
