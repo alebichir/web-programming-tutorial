@@ -1,7 +1,7 @@
 <h1>Hello</h1>
 
 <?php
-$nume =  gethostname() . " -> " . get_current_user();
+$nume =  gethostname() . " => " . get_current_user();
 
 echo $nume;
 echo "<br>";
@@ -25,18 +25,19 @@ echo $r;
 
 <h1>Tabla inmultirii</h1>
 <form action="">
-    <input trype="number" name="number" value="21">
+    <input type="number" name="number" value="21">
     <button>Multiply</button>
 </form>
+|
 <?php
-    for($i=1;$i<=10;$i++){
+    for($i=1; $i<=10; $i++){
         echo "<a href='?number=$i'>$i</a>|";
     }
 ?>
 
 <table>
     <?php
-    $numar = isset($_GET["number"]) ? $_GET["number"] : 1;
+    //$numar = isset($_GET["number"]) ? $_GET["number"] : 1;
 
     if(isset($_GET["number"])){
         $numar = $_GET["number"];

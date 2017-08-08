@@ -59,24 +59,32 @@ function createRow(contact) {
     tableContent += getRow(contact);
 }
 
-$.ajax('date/contacte.json').done(function(contacte){
-    console.info('contacte ',  contacte);
+
+//TODO disable cache
+//TODO response/ content type (json)
+//TODO status codes: 200, 404, 5**, 3**
+//TODO php includes/templates
+//TODO create new number (auto increment)
+
+
+$.ajax('date/contacte.json', { cache: false }).done(function(contacte) {
+    console.debug('contacte ', contacte);
     contacte.forEach(createRow);
     $("#contacts-list tbody").html(tableContent);
-
     $('.edit').click(function (){
 //TODO
-        editContact("Matei", "Ioan", "78");
+    editContact("Matei", "Ioan", "78");
     });
 
 });
 console.info('after ajax');
 
+
 function editContact(firstName, lastName, phone) {
     $("input[name=firstName]").val(firstName);
     $("input[name=lastName]").val(lastName);
     $("input[name=phone]").val(phone);
-}
+};
 
 
 //contacte.forEach(createRow);
