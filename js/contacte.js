@@ -16,8 +16,8 @@ function getRow(contact) {
     var  firstName = contact.firstName || '';
     var row = '<tr><td>' + firstName + '</td><td>' + lastName + '</td><td>' + phone + '</td>' +
         '<td class="actions">' +
-            '<span> <a href="date/remove.html?id=' + id + '"> &#x2718; </a> </span> ' +
-            '<span> <a class="edit" href="#"> &#x270E; </a> </span>' +
+            '<span> <a class="remove" href="date/remove-db.php?id=' + id + '"> &#x2718; </a> </span> ' +
+            '<span> <a class="edit" href="#" data-id="'+ id + '"> &#x270E; </a> </span>' +
         '</td>' +
         '</tr>';
     return row;
@@ -59,32 +59,43 @@ function createRow(contact) {
     tableContent += getRow(contact);
 }
 
+//disable cache
+//response/ content type (json)
+//status codes: 200, 404, 5**, 3**
+//php includes/templates
+//create new number (auto increment)
 
-//TODO disable cache
-//TODO response/ content type (json)
-//TODO status codes: 200, 404, 5**, 3**
-//TODO php includes/templates
-//TODO create new number (auto increment)
 
-
-$.ajax('date/contacte.json', { cache: false }).done(function(contacte) {
+$.ajax('date/list.php', {
+    cache: false,
+    dataType: 'json'
+}).done(function(contacte) {
     console.debug('contacte ', contacte);
     contacte.forEach(createRow);
     $("#contacts-list tbody").html(tableContent);
-    $('.edit').click(function (){
-//TODO
-    editContact("Matei", "Ioan", "78");
+
+    $("#contacts-list a.edit").click(function (){
+        var id = $(this).data('id');
+        var contact = contacte.find(function(c) {
+           return c.id == id;
+        });
+        console.debug('edit', id, contact, this);
+
+        $('input[name=id]').val(contact.id);
+        $('input[name=firstName]').val(contact.firstName);
+        $('input[name=lastName]').val(contact.lastName);
+        $('input[name=phone]').val(contact.phone);
+//editContact("Matei", "Ioan", "78");
     });
-
 });
-console.info('after ajax');
+//console.info('after ajax');
 
 
-function editContact(firstName, lastName, phone) {
+/*function editContact(firstName, lastName, phone) {
     $("input[name=firstName]").val(firstName);
     $("input[name=lastName]").val(lastName);
     $("input[name=phone]").val(phone);
-};
+}  de continuat */
 
 
 //contacte.forEach(createRow);

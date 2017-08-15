@@ -89,11 +89,12 @@
 
         <div id="content">
             <div id="breadcrumb">Agenda</div>
-            <form action="date/add.php" id="contact-form">
-                <input type="text" name="firstName" placeholder="firstName">
-                <input type="text" name= "lastName" placeholder="lastName">
-                <input type="text" name="phone" placeholder="phone">
-                <button>Add</button>
+            <form action="date/save.php" id="contact-form">
+                <input type="hidden" name="id">
+                <input type="text" name="firstName" placeholder="firstName" required>
+                <input type="text" name= "lastName" placeholder="lastName" required>
+                <input type="text" name="phone" placeholder="phone" required>
+                <button>Add/Save</button>
             </form>
             <table id="contacts-list">
                 <thead>
