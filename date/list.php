@@ -2,18 +2,6 @@
 
 include "connect-db.php";
 
-$servername = "localhost"; //pot pune numele altul calculator
-$username = "root";
-$password = "";
-$dbname = "web_dev_1";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $sql = "SELECT * FROM agenda";
 $result = $conn->query($sql);
 

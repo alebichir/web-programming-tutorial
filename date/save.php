@@ -31,7 +31,7 @@ if(isset($_GET["id"]) && $_GET["id"] != ''){
         }
     }
 } else {
-    //Add person
+    //add person
     $id = getNextId();
 
     $newPerson = array(
