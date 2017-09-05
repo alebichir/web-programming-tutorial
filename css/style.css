@@ -192,8 +192,8 @@ footer {
 }
 
 #contacts-list .actions span {
-    color: blue;
-}
+     color: blue;
+ }
 
 #contacts-list .actions span:hover {
     color: red;

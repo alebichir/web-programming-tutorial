@@ -13,6 +13,8 @@ if (isset($_GET["id"]) && $_GET["id"] != '') {
     $sql = "INSERT INTO agenda (first_name, last_name, phone) VALUES ('$first_name', '$last_name', '$phone')";
     $conn->query($sql);
 }
+
+
 $conn->close();
 
 header ('Location: ../contacte.html');
