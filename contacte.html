@@ -110,8 +110,12 @@
             </table>
         </div>
 
+        <table id="demo-list"></table>
+
         <div class="clear"></div>
+
     </div>
+
 
     <footer>
         <p>&copy; 2015 FastTrackIT. All rights reserved.</p>
@@ -128,5 +132,36 @@
 <!--<script src="js/calculator-copii.js"> </script>-->
 <!--<script src="js/dom-examples.js"></script>-->
 <script src="js/contacte.js"></script>
+
+<style>
+    .square {
+        border: 1px solid grey;
+        margin: 5px;
+        padding: 18px;
+        width: 50px;
+        display: inline-block;
+    }
+    .color {
+        background: blue;
+    }
+</style>
+
+<script>
+    var list = [];
+    //i rand
+    //j coloana
+    for (var i=0; i<8; i++) {
+        list.push('<tr>');
+
+        for (var j=0; j<8; j++) {
+            var colorata = i % 2 ? j % 2 : ((j+1) % 2);
+            list.push('<td class="square' + (colorata ? 'color' : '') + '">' + i + ',' + j + '</td>');
+        }
+        list.push('</tr>');
+    };
+
+    $('#demo-list').html(list.join(''));
+</script>
+
 </body>
 </html>
